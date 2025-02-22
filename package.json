@@ -1,0 +1,10 @@
+{
+    "name": "mi-proyecto",
+    "version": "1.0.0",
+    "description": "Un proyecto de Node.js en GitHub Actions",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "dependencies": {}
+  }

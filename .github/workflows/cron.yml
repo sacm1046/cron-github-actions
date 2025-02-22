@@ -26,4 +26,4 @@ jobs:
           fi
 
       - name: Ejecutar método con parámetro
-        run: node -e 'require("./index").miMetodo("{{ vars.HOLA }} desde GitHub Actions")'
+        run: node -e 'require("./index").miMetodo("${{ vars.HOLA }} desde GitHub Actions")'

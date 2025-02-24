@@ -1,32 +1,35 @@
-name: Ejecutar index.js cada 5 minutos
+name: Ejecutar Express y hacer un GET
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
-  workflow_dispatch:
+    - cron: "*/10 * * * *"  # Ejecutar cada 10 minutos
+  workflow_dispatch:  # Permitir ejecución manual
 
 jobs:
-  run-node-script:
+  test-express:
     runs-on: ubuntu-latest
 
     steps:
       - name: Clonar el repositorio
         uses: actions/checkout@v4
 
-      - name: message
-        run: echo "${{ vars.HOLA }}, Hola mundo"
-
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"  # Usa la versión que necesites
+          node-version: "18"
           cache: "npm"
 
-      - name: Instalar dependencias (si hay package.json)
-        run: |
-          if [ -f package.json ]; then
-            npm install
-          fi
+      - name: Instalar dependencias
+        run: npm install
 
-      - name: Ejecutar método con parámetro
-        run: node -e 'require("./index").miMetodo("${{ vars.HOLA }}")'
+      - name: Iniciar servidor Express en segundo plano
+        run: npm start &
+
+      - name: Esperar a que el servidor esté listo
+        run: sleep 5
+
+      - name: Hacer petición GET a Express
+        run: curl -i http://localhost:3000
+
+      - name: Finalizar procesos en segundo plano
+        run: kill $(lsof -t -i:3000) || true

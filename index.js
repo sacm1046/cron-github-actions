@@ -1,6 +1,11 @@
-function miMetodo(param) {
-    console.log(`Ejecutando miMetodo con el parámetro: ${param} a las ${new Date()}`);
-    // Aquí agregas la lógica que necesites
-}
+const express = require("express");
+const app = express();
+const PORT = 3000;
 
-module.exports = { miMetodo };
+app.get("/", (req, res) => {
+    res.send("¡Servidor Express funcionando!");
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor Express corriendo en http://localhost:${PORT}`);
+});

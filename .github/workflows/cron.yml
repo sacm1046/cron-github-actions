@@ -1,9 +1,9 @@
 name: Ejecutar Express y hacer un GET
 
 on:
-  schedule:
-    - cron: "*/10 * * * *"  # Ejecutar cada 10 minutos
-  workflow_dispatch:  # Permitir ejecución manual
+  # schedule:
+  #   - cron: "*/10 * * * *"
+  workflow_dispatch:
 
 jobs:
   test-express:
